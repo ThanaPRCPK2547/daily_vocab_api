@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from app.schemas import WordResponse
-from fastapi import HTTPException
-from app.routers import words
+
+from app.routers import words, practice
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -11,26 +10,7 @@ app = FastAPI(
 )
 
 app.include_router(words.router, prefix="/api", tags=["words"])
-
-    # TODO Write logic here....
-    #return {
-     #   "word": "example",
-      #  "definition": "a representative form or pattern",
-       # "difficulty_level": "Beginner"
-    #}
-    #return WordResponse(
-     #   id=12,
-      #  word="book",
-       # definition="This is a book",
-        #difficulty_level="Beginner"
-    #)
-
-    #words = []
-    #if len(words) == 0:
-     #   raise HTTPException(
-      #      status_code=404, 
-       #     detail="No words available"
-    #)
+app.include_router(practice.router, prefix="/api", tags=["practice"])
 
 @app.get("/")
 def read_root():
